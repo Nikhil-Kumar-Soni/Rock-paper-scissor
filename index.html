@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <title>Rock-Paper-Scissor</title>
+</head>
+    <style>
+        body{ text-align: center;
+            text-decoration: aqua; }
+        button{
+            margin: 5px;
+            padding: 0px;
+             }
+             .choice-button{
+                height: 105px;
+                width: 103px;
+                margin: 1px;
+                border-radius: 50px;
+                border-color: rgb(11, 11, 11);
+                cursor: pointer;
+             }
+
+             .choice-image{
+                height: 60px;
+                }
+                #Home{
+                height: 111px;
+                width: 152px;
+                margin: 1px;
+                border-radius: 0px;
+                border-color: rgb(241, 238, 238);
+                cursor: pointer;
+                text-align:center;
+              
+                }
+
+    </style>
+</head>
+<body>
+    <div><img id ="Home" src="images/01.png" alt="Game Image"></div>
+    <i><h1> <u>Rock Paper Scissor Game</u></h1> 
+        
+       
+<button class="choice-button" onclick="
+            computerChoice = generateComputerChoice(); 
+            resultMsg = getResult('Rock', computerChoice);
+            showResult('Rock', computerChoice, resultMsg);   
+            "><img src= "images/stone.png" alt="Rock image" class="choice-image">
+</button>
+
+<button class="choice-button" onclick="
+let computerChoice =  generateComputerChoice();
+let resultMsg = getResult('Paper',computerChoice);
+showResult('Paper', computerChoice, resultMsg);"><img src="images/paper.png" alt="Paper image" class="choice-image"></button>
+
+
+<button class="choice-button" onclick="
+            computerChoice = generateComputerChoice();
+            resultMsg = getResult('Scissor', computerChoice);
+            showResult('Scissor', computerChoice, resultMsg);   
+            "><img src="images/scissors.png" alt="Scissor image" class="choice-image">
+</button>
+
+
+<h3 id="User-move"></h3>
+<h3 id="computer-move"></h3>
+<h3 id="result"></h3>
+<h3 id="score"></h3>
+
+<BUTTOn onclick="localStorage.clear()
+             resetScore();">Reset</BUTTOn>
+             </i>
+<script>
+    let scoreStr = localStorage.getItem('score');
+    let score;
+    resetScore(scoreStr);
+
+    function resetScore(scoreStr){
+        score = scoreStr ? JSON.parse (scoreStr) : {  
+            win:0,
+                Lost:0,
+                Tie:0,
+            };
+             score.displayscore = function(){
+                return `Score = Won:${score.win}, Lost:${score.Lost}, Tie:${score.Tie}`};
+                showResult();
+    }
+
+
+    function generateComputerChoice(){
+        let randomNumber = Math.random() * 3;
+        if (randomNumber > 0 && randomNumber <= 1) 
+        {return'Paper';}
+        else if (randomNumber > 1 && randomNumber <= 2)
+        {return'Rock'; }
+        else {return 'Scissor';}
+    }
+
+
+    function getResult (userMove, computerMove)
+    {
+        if (userMove === 'Paper')
+        { if (computerMove === 'Rock'){
+                score.win++;
+                return 'user Won';
+            }
+            else if(computerMove === 'Paper')
+            { score.Tie++;
+                return ` it's a Tie`;
+            }else if (computerMove === 'Scissor')
+            { score.Lost++;
+                return 'Computer has Won';
+            }}  
+            
+            else if(userMove === 'Rock'){
+            if (computerMove === 'Rock'){
+                score.Tie++;
+              return  ` it's a Tie`;
+            } else if(computerMove === 'Paper')
+            { score.Lost++;
+                 return 'Computer has Won';
+            }else if (computerMove === 'Scissor'){
+            score.win++;
+                return'user Won';
+            }} 
+
+            else if(userMove === 'Scissor'){
+            if (computerMove === 'Rock'){
+                score.Lost++;
+              return 'Computer has Won';
+            } else if(computerMove === 'Paper'){
+            score.win++;
+                 return 'user Won';
+            }else if (computerMove === 'Scissor')
+            { score.Tie++;
+                return ` it's a Tie`;
+        }}}
+
+            function showResult(userMove, computerMove, result){
+                localStorage.setItem('score', JSON.stringify(score));
+
+                document.querySelector('#User-move').innerText = 
+                userMove  ? `you have chosen ${userMove}.`: '';
+
+                document.querySelector('#computer-move').innerText =
+                computerMove  ? `computer choice is ${computerMove}.` : '';
+                
+                document.querySelector('#result').innerText = result || '';
+
+                document.querySelector('#score').innerText = score.displayscore();
+            }
+            
+</script>
+</body>
+</html>
