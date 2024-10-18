@@ -4,8 +4,20 @@
        <title>Rock-Paper-Scissor</title>
 </head>
     <style>
-        body{ text-align: center;
-            text-decoration: aqua; }
+        body{ 
+                text-align: center;
+            text-decoration: aqua; 
+        background-color: #424242;}
+.bgc-img{
+    background-image: url(images/pxfuel\ \(1\).jpg);
+    background-size: cover;
+  background-position: right;
+  color: rgb(0, 0, 0);
+
+  position: relative;
+  border-radius: 10px;
+}
+
         button{
             margin: 5px;
             padding: 0px;
@@ -15,7 +27,7 @@
                 width: 103px;
                 margin: 1px;
                 border-radius: 50px;
-                border-color: rgb(11, 11, 11);
+                border-color: rgb(255, 255, 255);
                 cursor: pointer;
              }
 
@@ -36,6 +48,7 @@
     </style>
 </head>
 <body>
+    <div class="bgc-img">
     <div><img id ="Home" src="images/01.png" alt="Game Image"></div>
     <i><h1> <u>Rock Paper Scissor Game</u></h1> 
         
@@ -150,5 +163,6 @@ showResult('Paper', computerChoice, resultMsg);"><img src="images/paper.png" alt
             }
             
 </script>
+</div>
 </body>
 </html>
